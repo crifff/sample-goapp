@@ -15,5 +15,4 @@ deployment:
     branch: master
     commands:
       - openssl aes-256-cbc -d -in app/secret-cipher -k $SECRET_KEY > test.json
-      - ACCESS_TOKEN=`./tools/gtoken_linux_amd64 --json test.json`
-      - $HOME/go_appengine/appcfg.py update ./app/ --oauth2_access_token $ACCESS_TOKEN
+      - $HOME/go_appengine/appcfg.py update ./app/ --oauth2_access_token $(./tools/gtoken_linux_amd64 --json test.json)

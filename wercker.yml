@@ -27,9 +27,3 @@ build:
   - keima/go-appengine-util:
       cwd: app/
       method: build
-deploy:
-  steps:
-  - keima/go-appengine-util:
-      method: deploy
-      cwd: app/
-      token:  $APP_ENGINE_TOKEN

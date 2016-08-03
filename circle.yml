@@ -10,8 +10,9 @@ dependencies:
 test:
   pre:
     - go get -u github.com/jstemmer/go-junit-report
+    - mkdir -p $CIRCLE_TEST_REPORTS/golang  
   override:
-    - $HOME/go_appengine/goapp test -v ./app/ | go-junit-report > report.xml
+    - $HOME/go_appengine/goapp test -v ./app/ | $GOPATH/bin/go-junit-report > $CIRCLE_TEST_REPORTS/golang/junit.xml
 deployment:
   appengine:
     branch: master

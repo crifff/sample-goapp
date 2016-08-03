@@ -8,8 +8,10 @@ dependencies:
   override:
     - $HOME/go_appengine/goapp get -t -d -v  ./app/...
 test:
+  pre:
+    - go get -u github.com/jstemmer/go-junit-report
   override:
-    - $HOME/go_appengine/goapp test -v ./app/
+    - $HOME/go_appengine/goapp test -v ./app/ | go-junit-report > report.xml
 deployment:
   appengine:
     branch: master

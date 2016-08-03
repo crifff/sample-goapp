@@ -1,0 +1,35 @@
+# This references the default golang container from
+# the Docker Hub: https://registry.hub.docker.com/u/library/golang/
+# If you want Google's container you would reference google/golang
+# Read more about containers on our dev center
+# http://devcenter.wercker.com/docs/containers/index.html
+box: go-appengine-util
+# This is the build pipeline. Pipelines are the core of wercker
+# Read more about pipelines on our dev center
+# http://devcenter.wercker.com/docs/pipelines/index.html
+
+# You can also use services such as databases. Read more on our dev center:
+# http://devcenter.wercker.com/docs/services/index.html
+# services:
+    # - postgres
+    # http://devcenter.wercker.com/docs/services/postgresql.html
+
+    # - mongo
+    # http://devcenter.wercker.com/docs/services/mongodb.html
+build:
+  steps:
+  - keima/go-appengine-util:
+      cwd: app/
+      method: get
+  - keima/go-appengine-util:
+      cwd: app/
+      method: test
+  - keima/go-appengine-util:
+      cwd: app/
+      method: build
+deploy:
+  steps:
+  - keima/go-appengine-util:
+      method: deploy
+      cwd: app/
+      token:  $APP_ENGINE_TOKEN

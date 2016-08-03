@@ -11,9 +11,8 @@ test:
   override:
     - $HOME/go_appengine/goapp test -v ./app/
 deployment:
-  pre:
-    - openssl aes-256-cbc -d -in app/secret-cipher -k $SECRET_KEY > test.json
   appengine:
     branch: master
     commands:
+      - openssl aes-256-cbc -d -in app/secret-cipher -k $SECRET_KEY > test.json
       - $HOME/go_appengine/appcfg.py update . --oauth2_access_token $(tools/gtoken --json test.json)

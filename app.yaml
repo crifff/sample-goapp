@@ -1,0 +1,42 @@
+application: millionappdev
+module: default
+version: alpha
+runtime: go
+api_version: go1
+threadsafe: true
+
+handlers:
+  - url: /.*
+    script: _go_app
+
+skip_files:
+- app\.yaml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?tests$
+- ^(.*/)?test$
+- ^test/(.*/)?
+- ^COPYING.LESSER
+- ^README\..*
+- \.gitignore
+- \.gitattributes
+- ^\.git/.*
+- ^\.idea/.*
+- \.*\.lint$
+- ^fabfile\.py
+- ^testrunner\.py
+- ^grunt\.js
+- ^gulpfile\.js
+- ^package\.json
+- ^node_modules/(.*/)?
+- ^gulp/(.*/)?
+- ^.sass-cache/(.*/)?
+- ^.tmp/(.*/)?
+- ^project/(.*/)?
+- \.editorconfig
+- \.jshintrc
+- vendor/
+

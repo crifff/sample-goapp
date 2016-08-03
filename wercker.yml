@@ -3,7 +3,7 @@
 # If you want Google's container you would reference google/golang
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: go-appengine-util
+box: wercker/golang
 # This is the build pipeline. Pipelines are the core of wercker
 # Read more about pipelines on our dev center
 # http://devcenter.wercker.com/docs/pipelines/index.html
@@ -18,6 +18,7 @@ box: go-appengine-util
     # http://devcenter.wercker.com/docs/services/mongodb.html
 build:
   steps:
+  - keima/go-appengine-util@0.2.4
   - keima/go-appengine-util:
       cwd: app/
       method: get

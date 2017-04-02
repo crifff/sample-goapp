@@ -1,11 +1,11 @@
 version: 2
 jobs:
   build:
-    working_directory: /gopath/src/github.com/crifff/gae-sample
+    working_directory: /go/src/github.com/crifff/gae-sample
     docker:
-      - image: 1.6.3-alpine
+      - image: circleci/cci-demo-go-primary:0.0.2
         environment:
-          PROJECT_ROOT: /gopath/src/github.com/crifff/gae-sample
+          PROJECT_ROOT: /go/src/github.com/crifff/gae-sample
           PATH: "${PATH}:${GOPATH}/bin:/go_appengine/bin:${PROJECT_ROOT}/node_modules/.bin"
     steps:
       - checkout

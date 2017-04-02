@@ -1,11 +1,12 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sample_goapp
+    working_directory: /go/src/github.com/crifff/gae-sample
     docker:
-      - image: criff/goapp-docker
+      - image: golang:1.6.3
     steps:
       - checkout
+      - run: echo $GOPATH
       - run:
           name: run test
-          command: goapp test ./...
+          command: go test ./...

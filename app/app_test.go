@@ -2,22 +2,27 @@ package main
 
 import (
 	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
 	"testing"
+
+	"net/http/httptest"
+
+	"google.golang.org/appengine/aetest"
 )
 
 func TestHello(t *testing.T) {
-	ts := httptest.NewServer(nil)
-	defer ts.Close()
-
-	// リクエストの送信先はテストサーバのURLへ。
-	r, err := http.Get(ts.URL)
+	inst, err := aetest.NewInstance(nil)
 	if err != nil {
-		t.Fatalf("Error by http.Get(). %v", err)
+		t.Fatal(err)
 	}
+	defer inst.Close()
 
-	data, err := ioutil.ReadAll(r.Body)
+	r, err := inst.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	w := httptest.NewRecorder()
+	helloWorld(w, r)
+	data, err := ioutil.ReadAll(w.Body)
 	if err != nil {
 		t.Fatalf("Error by ioutil.ReadAll(). %v", err)
 	}
